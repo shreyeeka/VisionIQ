@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard | VisionIQ{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container page-hero__inner">
+        <div class="reveal">
+            <h1 class="page-hero__title"><i class="bi bi-grid-1x2-fill"></i> Dashboard</h1>
+            <p class="page-hero__sub">Your prediction history and analysis records</p>
+        </div>
+        <a href="{% url 'upload' %}" class="btn btn-light reveal">
+            <i class="bi bi-plus-lg"></i> New Analysis
+        </a>
+    </div>
+</section>
+
+<section class="section-premium pt-0">
+    <div class="container">
+        <div class="row g-3 mb-4">
+            <div class="col-sm-6 col-lg-3">
+                <div class="stat-card-premium reveal">
+                    <div class="stat-card-premium__icon stat-icon-blue"><i class="bi bi-file-earmark-medical"></i></div>
+                    <div>
+                        <span class="stat-card-premium__val">{{ total_scans|default:"0" }}</span>
+                        <span class="stat-card-premium__lbl">Total Scans</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="stat-card-premium reveal reveal-delay">
+                    <div class="stat-card-premium__icon stat-icon-red"><i class="bi bi-exclamation-triangle"></i></div>
+                    <div>
+                        <span class="stat-card-premium__val">{{ fractured_count|default:"0" }}</span>
+                        <span class="stat-card-premium__lbl">Fractures Found</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="stat-card-premium reveal reveal-delay">
+                    <div class="stat-card-premium__icon stat-icon-green"><i class="bi bi-check-circle"></i></div>
+                    <div>
+                        <span class="stat-card-premium__val">{{ normal_count|default:"0" }}</span>
+                        <span class="stat-card-premium__lbl">Normal Results</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="stat-card-premium reveal reveal-delay-2">
+                    <div class="stat-card-premium__icon stat-icon-blue"><i class="bi bi-percent"></i></div>
+                    <div>
+                        <span class="stat-card-premium__val">{% if avg_confidence %}{{ avg_confidence }}%{% else %}—{% endif %}</span>
+                        <span class="stat-card-premium__lbl">Avg. Confidence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if not user.is_authenticated %}
+        <div class="empty-state-premium reveal">
+            <img src="{% static 'images/xray_demo.png' %}" alt="">
+            <h3>Sign in to view your dashboard</h3>
+            <p>Log in to access your personal prediction history and scan statistics.</p>
+            <a href="{% url 'login' %}?next={% url 'dashboard' %}" class="btn btn-primary-medical mt-2">
+                <i class="bi bi-box-arrow-in-right"></i> Sign In
+            </a>
+        </div>
+        {% else %}
+
+        <div class="table-premium d-lg-block reveal">
+            <div class="table-responsive">
+                <table class="table-premium mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date &amp; Time</th>
+                            <th>File</th>
+                            <th>Result</th>
+                            <th>Confidence</th>
+                            <th class="text-end">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prediction in predictions %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td class="text-secondary">{{ prediction.created_at|date:"M d, Y H:i" }}</td>
+                            <td><i class="bi bi-file-earmark-image text-primary-medical"></i> {{ prediction.filename }}</td>
+                            <td>
+                                {% if prediction.is_fractured %}
+                                <span class="badge-fractured">Fracture Detected</span>
+                                {% else %}
+                                <span class="badge-normal">No Fracture</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="progress-medical flex-grow-1" style="max-width:80px">
+                                        <div class="progress-bar" style="width:{{ prediction.confidence }}%"></div>
+                                    </div>
+                                    <span class="fw-bold text-primary-medical small">{{ prediction.confidence|floatformat:1 }}%</span>
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                <a href="{% url 'upload' %}" class="btn btn-sm btn-outline-medical" title="Upload new scan">
+                                    <i class="bi bi-eye"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="p-0 border-0">
+                                <div class="empty-state-premium">
+                                    <img src="{% static 'images/hero-xray.svg' %}" alt="">
+                                    <h3>No predictions yet</h3>
+                                    <p>Upload your first X-ray to begin AI fracture screening.</p>
+                                    <a href="{% url 'upload' %}" class="btn btn-primary-medical mt-2">
+                                        <i class="bi bi-cloud-upload"></i> Upload X-ray
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="d-lg-none">
+            {% for prediction in predictions %}
+            <div class="card-medical p-3 mb-3 reveal">
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="small text-secondary">{{ prediction.created_at|date:"M d, Y H:i" }}</span>
+                    {% if prediction.is_fractured %}
+                    <span class="badge-fractured">Fracture Detected</span>
+                    {% else %}
+                    <span class="badge-normal">No Fracture</span>
+                    {% endif %}
+                </div>
+                <p class="fw-bold mb-2"><i class="bi bi-file-earmark-image"></i> {{ prediction.filename }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="fw-bold text-primary-medical">{{ prediction.confidence|floatformat:1 }}%</span>
+                    <a href="{% url 'history' %}" class="btn btn-sm btn-outline-medical">History</a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state-premium reveal">
+                <img src="{% static 'images/hero-xray.svg' %}" alt="">
+                <h3>No predictions yet</h3>
+                <p>Upload your first X-ray to get started.</p>
+                <a href="{% url 'upload' %}" class="btn btn-primary-medical"><i class="bi bi-cloud-upload"></i> Upload</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

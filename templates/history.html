@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Prediction History | VisionIQ{% endblock %}
+{% block content %}
+<section class="section container">
+    {% if login_required_message %}
+        <div class="empty-state reveal">
+            <h2>Login Required</h2>
+            <p>Please login to view your prediction history.</p>
+            <a class="btn btn-primary" href="{% url 'login' %}?next={% url 'history' %}">Go to Login</a>
+        </div>
+    {% else %}
+    <div class="section-head history-head reveal">
+        <div>
+            <h1>Prediction History</h1>
+            <p style="color: var(--muted); margin: 4px 0 0;">Browse your past AI fracture screening results</p>
+        </div>
+        <form class="search-form" method="get">
+            <input type="text" name="q" value="{{ search_query }}" placeholder="Search by result, confidence, date...">
+            <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i> Search</button>
+        </form>
+    </div>
+
+    {% if page_obj.object_list %}
+    <div class="history-grid">
+        {% for item in page_obj.object_list %}
+        <article class="history-card reveal">
+            <img src="{{ item.uploaded_image.url }}" alt="Uploaded x-ray">
+            <div class="history-content">
+                <div style="margin-bottom: 8px;">
+                    {% if item.is_fractured %}
+                    <span class="badge-fractured">Fracture Detected</span>
+                    {% else %}
+                    <span class="badge-normal">No Fracture Detected</span>
+                    {% endif %}
+                </div>
+                <p><strong>Confidence:</strong> {{ item.confidence|floatformat:1 }}%</p>
+                <p><strong>Date:</strong> {{ item.created_at|date:"M d, Y H:i" }}</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?q={{ search_query }}&page={{ page_obj.previous_page_number }}" class="btn btn-ghost btn-sm">Previous</a>
+        {% endif %}
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?q={{ search_query }}&page={{ page_obj.next_page_number }}" class="btn btn-ghost btn-sm">Next</a>
+        {% endif %}
+    </div>
+    {% else %}
+        <div class="empty-state reveal">No analyses found yet. Start by uploading an X-ray.</div>
+    {% endif %}
+    {% endif %}
+</section>
+{% endblock %}

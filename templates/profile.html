@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Profile | VisionIQ{% endblock %}
+{% block content %}
+<section class="section container">
+    <div class="section-head"><h1>Account Profile</h1></div>
+
+    <div class="profile-grid">
+        <article class="card">
+            <h3>User Information</h3>
+            <form method="post" class="stack-form">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="update_profile">
+                {{ profile_form.as_p }}
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+        </article>
+
+        <article class="card">
+            <h3>Change Password</h3>
+            <form method="post" class="stack-form">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="update_password">
+                {{ password_form.as_p }}
+                <button type="submit" class="btn btn-secondary">Update Password</button>
+            </form>
+        </article>
+    </div>
+
+    <div class="summary-grid">
+        <article class="summary-card"><span>Username</span><h4>{{ request.user.username }}</h4></article>
+        <article class="summary-card"><span>Total Scans</span><h4>{{ total_scans }}</h4></article>
+        <article class="summary-card"><span>Fracture Flags</span><h4>{{ detections }}</h4></article>
+    </div>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn-ghost" type="submit">Logout</button>
+    </form>
+</section>
+{% endblock %}

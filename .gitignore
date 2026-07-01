@@ -1,0 +1,27 @@
+# Python cache files
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+
+# Dataset
+dataset/
+
+# AI model weights
+mainapp/ai/models/
+
+# User uploaded files
+media/
+
+# Prediction outputs
+predictions/
+
+# Database
+db.sqlite3
+
+# Environment variables
+.env
+
+# Evaluation outputs
+evaluation_results/

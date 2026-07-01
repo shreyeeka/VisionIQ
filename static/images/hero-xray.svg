@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" fill="none">
+  <rect width="320" height="240" rx="16" fill="#0F2744"/>
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1E4976" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect x="16" y="16" width="288" height="208" rx="8" fill="url(#grid)" opacity="0.6"/>
+  <path d="M160 60 C130 60 110 90 110 120 C110 150 130 180 160 180 C190 180 210 150 210 120 C210 90 190 60 160 60Z" fill="#3B82F6" opacity="0.35"/>
+  <ellipse cx="130" cy="110" rx="18" ry="28" fill="#60A5FA" opacity="0.5"/>
+  <ellipse cx="190" cy="110" rx="18" ry="28" fill="#60A5FA" opacity="0.5"/>
+  <rect x="148" y="95" width="24" height="50" rx="8" fill="#93C5FD" opacity="0.4"/>
+  <path d="M155 115 L165 125" stroke="#F97316" stroke-width="3" stroke-linecap="round"/>
+  <path d="M40 40 L60 40 M40 40 L40 60" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+  <path d="M280 40 L260 40 M280 40 L280 60" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 200 L60 200 M40 200 L40 180" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+  <path d="M280 200 L260 200 M280 200 L280 180" stroke="#60A5FA" stroke-width="2" stroke-linecap="round"/>
+  <rect x="230" y="24" width="70" height="22" rx="11" fill="rgba(255,255,255,0.12)"/>
+  <text x="265" y="39" text-anchor="middle" fill="#93C5FD" font-size="10" font-family="Inter,sans-serif">Demo UI</text>
+</svg>

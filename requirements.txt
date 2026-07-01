@@ -1,0 +1,15 @@
+# Core dependencies
+Django>=5.0,<6.0
+Pillow>=10.0.0
+torch
+torchvision
+ultralytics
+opencv-python
+
+# Evaluation
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+PyYAML

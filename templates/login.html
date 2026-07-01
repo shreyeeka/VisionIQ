@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Login | VisionIQ{% endblock %}
+{% block content %}
+<section class="auth-wrap container">
+    <article class="auth-card">
+        <h1>Welcome Back</h1>
+        <p>Log in to analyze and manage your X-ray predictions.</p>
+        <form method="post" class="stack-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <p class="auth-link">No account? <a href="{% url 'signup' %}">Create one</a></p>
+    </article>
+</section>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Contact Us | VisionIQ{% endblock %}
+{% block content %}
+<section class="section container">
+    <div class="card shadow rounded-4 p-4">
+        <h1 class="mb-3 text-primary">Contact Us</h1>
+        <p>
+            For inquiries, support, or feedback, please reach out to our team:
+        </p>
+        <ul>
+            <li>Email: <a href="mailto:support@visioniq.com">support@visioniq.com</a></li>
+            <li>Phone: +1-800-555-1234</li>
+        </ul>
+        <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" class="form-control rounded-pill" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" class="form-control rounded-pill" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control rounded-4" id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary rounded-pill">Send Message</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}About – VisionIQ{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 0 72px;">
+  <section class="hero--subtle p-4 p-lg-5 mb-4 mb-lg-5 position-relative overflow-hidden reveal">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-7">
+        <div class="section-kicker">About VisionIQ</div>
+        <h1 class="h3 text-navy fw-bold mb-3">A premium medical-tech interface for fracture screening</h1>
+        <p class="text-secondary mb-0">
+          VisionIQ is an AI-powered bone fracture analyzer designed for a modern radiology workflow:
+          upload X-rays, receive an instant label, review confidence, and view a localization overlay when available.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="card-medical border-0 shadow-soft">
+          <div class="p-4">
+            <div class="d-flex align-items-center gap-3">
+              <img src="{% static 'images/about-illustration.svg' %}" alt="Radiology illustration" width="74" height="74">
+              <div>
+                <div class="fw-semibold text-navy">Mission</div>
+                <div class="small text-secondary">Deliver clear, trustworthy UX for AI-assisted radiology screening.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero__glow" aria-hidden="true"></div>
+  </section>
+
+  <section class="mb-4 mb-lg-5">
+    <div class="section-header reveal" style="text-align: left; margin-bottom: 32px;">
+      <span class="section-kicker">What we offer</span>
+      <h2 style="text-align: left;">Built for clinical clarity</h2>
+    </div>
+    <div class="row g-3 g-lg-4">
+      <div class="col-md-4">
+        <div class="card-medical h-100 hover-lift reveal">
+          <div class="p-4">
+            <div class="icon-chip mb-3">
+              <img src="{% static 'images/icon-insights.svg' %}" alt="" width="20" height="20">
+            </div>
+            <h2 class="h5 text-navy fw-semibold mb-2">Clinical-style reporting</h2>
+            <p class="text-secondary mb-0">Structured panels with status colors, confidence bars, and clear sections for rapid review.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-medical h-100 hover-lift reveal reveal-delay">
+          <div class="p-4">
+            <div class="icon-chip mb-3">
+              <img src="{% static 'images/icon-scan.svg' %}" alt="" width="20" height="20">
+            </div>
+            <h2 class="h5 text-navy fw-semibold mb-2">Radiology visuals</h2>
+            <p class="text-secondary mb-0">Subtle X-ray-inspired illustrations and a balanced medical palette throughout the platform.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card-medical h-100 hover-lift reveal reveal-delay-2">
+          <div class="p-4">
+            <div class="icon-chip mb-3">
+              <img src="{% static 'images/icon-shield.svg' %}" alt="" width="20" height="20">
+            </div>
+            <h2 class="h5 text-navy fw-semibold mb-2">Trust and safety</h2>
+            <p class="text-secondary mb-0">A professional interface designed to be readable, calm, and unobtrusive for healthcare workflows.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-4 mb-lg-5">
+    <div class="d-flex align-items-end justify-content-between flex-column flex-md-row gap-2 mb-3 reveal">
+      <div>
+        <div class="section-kicker">Team</div>
+        <h2 class="h3 text-navy fw-bold mb-0">Meet the team</h2>
+      </div>
+      <div class="text-secondary">A focused trio covering frontend, backend, and ML.</div>
+    </div>
+
+    <div class="row g-3 g-lg-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card-medical border-0 shadow-soft hover-lift team-card reveal">
+          <div class="p-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="avatar avatar--blue">
+                <img src="{% static 'images/avatar-frontend.svg' %}" alt="Shreyeeka Maharjan" width="44" height="44">
+              </div>
+              <div>
+                <div class="fw-semibold text-navy">Shreyeeka Maharjan</div>
+                <div class="badge-soft-info mt-1">Frontend Developer</div>
+              </div>
+            </div>
+            <div class="small text-secondary">
+              Builds the responsive medical UI, visual hierarchy, and clean interactions for a premium clinical experience.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-medical border-0 shadow-soft hover-lift team-card reveal reveal-delay">
+          <div class="p-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="avatar avatar--navy">
+                <img src="{% static 'images/avatar-backend.svg' %}" alt="Samana Adhikari" width="44" height="44">
+              </div>
+              <div>
+                <div class="fw-semibold text-navy">Samana Adhikari</div>
+                <div class="badge-soft-navy mt-1">Backend Developer</div>
+              </div>
+            </div>
+            <div class="small text-secondary">
+              Designs secure APIs and data flow to connect uploads, inference, and results into a stable Django workflow.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card-medical border-0 shadow-soft hover-lift team-card reveal reveal-delay-2">
+          <div class="p-4">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="avatar avatar--cyan">
+                <img src="{% static 'images/avatar-ml.svg' %}" alt="Laxmi Raut" width="44" height="44">
+              </div>
+              <div>
+                <div class="fw-semibold text-navy">Laxmi Raut</div>
+                <div class="badge-soft-success mt-1">ML Engineer</div>
+              </div>
+            </div>
+            <div class="small text-secondary">
+              Develops and evaluates the fracture detection models and supports localization overlays for interpretability.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="card-medical border-0 shadow-soft overflow-hidden">
+      <div class="p-4 p-lg-5">
+        <div class="row align-items-center gy-4">
+          <div class="col-lg-8">
+            <div class="section-kicker">Get started</div>
+            <h2 class="h4 text-navy fw-bold mb-2">Experience AI-powered fracture screening</h2>
+            <p class="text-secondary mb-0">
+              Upload an X-ray to receive instant detection results, confidence scores, and localization overlays — all within a clean, hospital-grade interface.
+            </p>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a class="btn btn-medical" href="{% url 'upload' %}"><i class="bi bi-cloud-upload"></i> Try upload</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}

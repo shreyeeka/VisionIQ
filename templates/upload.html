@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Upload X-Ray | VisionIQ{% endblock %}
+{% block content %}
+<section class="upload-page">
+    <div class="container">
+        <div class="section-head reveal">
+            <h1>Upload X-Ray for AI Analysis</h1>
+            <p>Drag and drop, browse from gallery, or capture from camera.</p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="upload-card reveal" id="uploadForm">
+            {% csrf_token %}
+            <div class="dropzone" id="dropzone">
+                {{ form.uploaded_image }}
+                <div class="dropzone-content" id="dropzoneContent">
+                    <div class="dropzone-icon"><i class="bi bi-cloud-arrow-up"></i></div>
+                    <h3>Drop X-ray image here</h3>
+                    <p>or click to browse / capture from mobile camera</p>
+                    <button type="button" class="btn btn-secondary" id="browseBtn">Choose Image</button>
+                </div>
+                <img id="previewImage" class="preview-image hidden" alt="Preview">
+            </div>
+
+            <div class="upload-actions">
+                <button type="button" class="btn btn-ghost hidden" id="removeBtn">Remove Image</button>
+                <button type="submit" class="btn btn-primary" id="analyzeBtn">
+                    <i class="bi bi-cpu"></i> Analyze
+                </button>
+            </div>
+
+            <div class="loading-state hidden" id="loadingState">
+                <div class="loader-ring"></div>
+                <div class="loader-dots"><span></span><span></span><span></span></div>
+                <p>Running AI fracture detection…</p>
+            </div>
+
+            {% if form.errors %}
+                <div class="form-errors">{{ form.uploaded_image.errors }}</div>
+            {% endif %}
+        </form>
+
+        {% if prediction %}
+        <div class="results-panel">
+            <div class="result-status {% if prediction.is_fractured %}result-status--fracture{% else %}result-status--normal{% endif %} reveal">
+                <div class="result-status__icon">
+                    {% if prediction.is_fractured %}
+                        <i class="bi bi-exclamation-triangle-fill" style="color: var(--danger);"></i>
+                    {% else %}
+                        <i class="bi bi-check-circle-fill" style="color: var(--success);"></i>
+                    {% endif %}
+                </div>
+                <div class="result-status__text">
+                    <h2>{{ prediction.display_result }}</h2>
+                    <p>AI screening completed ·</p>
+                </div>
+            </div>
+
+            <div class="confidence-card reveal">
+                <div class="confidence-card__header">
+                    <span>Confidence Level</span>
+                    <span class="confidence-card__value">{{ prediction.confidence|floatformat:1 }}%</span>
+                </div>
+                <div class="confidence-bar">
+                    <div class="confidence-bar__fill" style="width: {{ prediction.confidence }}%"></div>
+                </div>
+            </div>
+
+            <div class="result-grid reveal">
+                <article class="result-card">
+                    <div class="result-card__header">
+                        <i class="bi bi-image text-primary-medical"></i>
+                        <h3>Original X-Ray</h3>
+                    </div>
+                    <div class="result-card__body">
+                        <img src="{{ prediction.uploaded_image.url }}" alt="Original X-ray">
+                    </div>
+                </article>
+                <article class="result-card">
+                    <div class="result-card__header">
+                        <i class="bi bi-bounding-box text-primary-medical"></i>
+                        <h3>Localized Fracture Output</h3>
+                    </div>
+                    <div class="result-card__body">
+                        {% if prediction.result_image %}
+                            <img src="{{ prediction.result_image.url }}" alt="Detected fracture output">
+                        {% else %}
+                            <img src="{{ prediction.uploaded_image.url }}" alt="Fallback output">
+                        {% endif %}
+                    </div>
+                </article>
+            </div>
+
+            <div class="summary-grid reveal">
+                <article class="summary-card">
+                    <span>Detection Result</span>
+                    <h4>{{ prediction.display_result }}</h4>
+                </article>
+                <article class="summary-card">
+                    <span>Confidence Score</span>
+                    <h4>{{ prediction.confidence|floatformat:1 }}%</h4>
+                </article>
+                <article class="summary-card">
+                    <span>Prediction Summary</span>
+                    <h4>Generated on {{ prediction.created_at|date:"M d, Y H:i" }}</h4>
+                </article>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/upload.js' %}"></script>
+{% endblock %}

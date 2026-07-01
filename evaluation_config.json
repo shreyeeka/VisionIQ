@@ -1,0 +1,9 @@
+{
+    "resnet": {
+        "validation_dir": "C:/Users/ACER/Desktop/Vision_Dataset/FracAtlas/images"
+    },
+
+    "yolo": {
+        "data_yaml": "C:/Users/ACER/Desktop/Vision_Dataset/FracAtlas_YOLO/data.yaml"
+    }
+}

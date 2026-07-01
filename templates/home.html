@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}VisionIQ | AI Bone Fracture Detection{% endblock %}
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-card">
+            <div class="hero-content reveal">
+                <div class="hero-badges">
+                    <span class="badge-pill"><i class="bi bi-heart-pulse"></i> Radiology · AI</span>
+                    <!-- <span class="badge-pill"><i class="bi bi-shield-check"></i> Hospital-grade UI</span> -->
+                </div>
+                <h1 class="hero-title">VisionIQ – AI-powered <span class="highlight">Bone Fracture</span> Analyzer</h1>
+                <p class="hero-lead">Upload an X-ray to generate an instant screening result with a confidence score and a localization overlay.</p>
+                <div class="hero-actions">
+                    <a href="{% url 'upload' %}" class="btn btn-primary"><i class="bi bi-cloud-upload"></i> Upload X-ray</a>
+                    <a href="#how-it-works" class="btn btn-secondary">How it works</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat reveal-delay">
+                        <span>Avg. analysis time</span>
+                        <strong>~2–5s</strong>
+                    </div>
+                    <div class="hero-stat reveal-delay">
+                        <span>Model outputs</span>
+                        <strong>Result + Confidence</strong>
+                    </div>
+                    <div class="hero-stat reveal-delay-2">
+                        <span>Localization</span>
+                        <strong>YOLO overlay</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-preview reveal reveal-delay">
+                <div class="preview-card">
+                    <!-- <div class="preview-card__header">
+                        <span class="badge-pill">Demo UI</span>
+                    </div> -->
+                    <div class="preview-card__body">
+                        <img src="{% static 'images/xray_demo.png' %}" alt="AI fracture detection preview">
+                    </div>
+                    <p class="preview-card__caption">Upload an X-ray image to get a screening result and a confidence score. The detection overlay will appear when available.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="how-it-works">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-kicker">Capabilities</span>
+            <h2>Why VisionIQ</h2>
+            <p>A modern AI radiology assistant built for speed, clarity, and clinical-grade presentation.</p>
+        </div>
+        <div class="feature-grid">
+            <article class="feature-card reveal">
+                <div class="feature-card__icon"><i class="bi bi-bullseye"></i></div>
+                <h3>AI-assisted screening</h3>
+                <p>YOLOv8 localization combined with PyTorch classification delivers instant fracture detection with bounding box overlays.</p>
+            </article>
+            <article class="feature-card reveal reveal-delay">
+                <div class="feature-card__icon"><i class="bi bi-shield-check"></i></div>
+                <h3>Trustworthy UI</h3>
+                <p>Clean, hospital-grade interface with confidence indicators and structured result panels for confident review.</p>
+            </article>
+            <article class="feature-card reveal reveal-delay-2">
+                <div class="feature-card__icon"><i class="bi bi-upload"></i></div>
+                <h3>Confidence + overlay</h3>
+                <p>Drag-and-drop upload, real-time preview, and side-by-side original vs. localized output visualization.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+    <div class="stats-band reveal">
+        <div class="stats-band__grid">
+            <div class="stats-band__item">
+                <h3 data-count="{{ stats.total_scans }}">{{ stats.total_scans }}</h3>
+                <p>Total Scans Processed</p>
+            </div>
+            <div class="stats-band__item">
+                <h3 data-count="{{ stats.total_users }}">{{ stats.total_users }}</h3>
+                <p>Active Analysts</p>
+            </div>
+            <div class="stats-band__item">
+                <h3 data-count="{{ stats.positive_cases }}">{{ stats.positive_cases }}</h3>
+                <p>Flagged Fracture Cases</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-band">
+    <div class="container">
+        <div class="cta-band__inner reveal">
+            <h2>Ready to analyze your first X-ray?</h2>
+            <p>Get instant AI-powered fracture screening with confidence scores and localization overlays.</p>
+            <div class="hero-actions" style="justify-content: center; margin-bottom: 0;">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'upload' %}" class="btn btn-primary"><i class="bi bi-cloud-upload"></i> Upload X-ray</a>
+                    <a href="{% url 'dashboard' %}" class="btn btn-secondary">View Dashboard</a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="btn btn-primary">Get Started</a>
+                    <a href="{% url 'login' %}" class="btn btn-secondary">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

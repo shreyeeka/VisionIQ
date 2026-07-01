@@ -1,0 +1,10 @@
+{
+  "resnet": {
+    "validation_dir": "../dataset/validation",
+    "comment": "Folder with class subdirs: fracture_unspecified/ and none/ (aliases supported)"
+  },
+  "yolo": {
+    "data_yaml": "../dataset/data.yaml",
+    "comment": "YOLO dataset config with train/val paths and class names"
+  }
+}
