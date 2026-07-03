@@ -131,20 +131,28 @@ Final Year Project - VisionIQ
 
 ## 🏠 Home Page
 
-![Home](assets/home.png)
+![Home](images/home.png)
 
 ---
 
 ## 📤 Upload X-ray
 
-![Upload](assets/upload.png)
+![Upload](images/upload.png)
 
 ---
 
 ## 🩻 Detection Result
 
-![Prediction](assets/prediction.png)
+![Prediction](images/result.png)
 
 ---
 
 ## Dashboard
+
+![Dashboard](images/dashboard.png)
+
+---
+## History
+![History](images/history.png)
+
+
