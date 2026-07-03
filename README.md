@@ -123,3 +123,25 @@ The trained model weights are not included in this repository due to their large
 ## Authors
 
 Final Year Project - VisionIQ
+
+# Screenshots
+
+## 🏠 Home Page
+
+![Home](assets/home.png)
+
+---
+
+## 📤 Upload X-ray
+
+![Upload](assets/upload.png)
+
+---
+
+## 🩻 Detection Result
+
+![Prediction](assets/prediction.png)
+
+---
+
+## Dashboard
