@@ -124,6 +124,9 @@ The trained model weights are not included in this repository due to their large
 
 Final Year Project - VisionIQ
 
+---
+
+
 # Screenshots
 
 ## 🏠 Home Page
