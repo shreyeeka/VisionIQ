@@ -155,4 +155,10 @@ Final Year Project - VisionIQ
 ## History
 ![History](images/history.png)
 
+---
+
+## 📚 Academic Purpose
+
+This project was developed as the **Final Year Major Project** for the **Bachelor of Science in Computer Science and Information Technology (BSc CSIT)** program. It demonstrates the practical application of modern web development, artificial intelligence, and cloud technologies by building a real-world AI-powered image analysis platform.
+
 
